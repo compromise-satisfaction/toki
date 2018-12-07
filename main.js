@@ -15,7 +15,10 @@ window.onload = function(){
         var time=0;
         var iii=1;
         var face1 = 1;
-        var gra = 10;//重力加速度
+        var ggg=0;
+        var spead=0;
+        var syosoku=0;
+        var gra = 5;//重力加速度
         var e = 0.3;//反発係数
         
         //枠の初期設定
@@ -29,7 +32,7 @@ window.onload = function(){
         var tail = new Sprite(350,250);
         tail.image = core.assets['tail.png'];
         tail.x = 217+350;
-        tail.y = 699+10;
+        tail.y = 699-800;
         core.rootScene.addChild(tail);
         
         //後ろ髪の初期設定
@@ -41,9 +44,9 @@ window.onload = function(){
         
         //右脚の初期設定
         var right_leg = new Sprite(200,926);
-        var syosoku = 0;
-        var spead=0;
-        var ggg = 0;
+        var syosoku_t = 0;
+        var spead_t=0;
+        var ggg_t = 0;
         right_leg.image = core.assets['right_leg.png'];
         right_leg.x = tail.x-13;
         right_leg.y = tail.y-316;
@@ -170,6 +173,8 @@ window.onload = function(){
             };
             if (core.input.up){
                 name.y-=10;
+                ggg_t=0;
+                syosoku_t=0;
                 right_wing.rotation=time*0.4;
                 left_wing.rotation=-time*0.4;
             };
@@ -191,6 +196,10 @@ window.onload = function(){
                 right_arm.rotation=-time*0.1;
                 left_arm.rotation=time*0.1;
             };
+        };
+        
+        function grand(name){
+            name.y-=spead_t;
         };
         
         right_leg.addEventListener('enterframe',function(){
@@ -237,6 +246,7 @@ window.onload = function(){
                                    Back_Baird.y -= spead;
                                    };
                               spead = syosoku-gra*ggg;
+                              spead_t = syosoku_t-gra*ggg_t;
                               idou(eye);
                               idou(eye);
                               idou(back_hair);
@@ -253,16 +263,35 @@ window.onload = function(){
                               idou(fur);
                               idou(face);
                               idou(right_leg);
-                              idou(Ground1);
                               idou(right_hair);
                               idou(left_hair);
+                              grand(eye);
+                              grand(back_hair);
+                              grand(tail);
+                              grand(bangs);
+                              grand(left_hand);
+                              grand(right_hand);
+                              grand(left_arm);
+                              grand(right_arm);
+                              grand(left_leg);
+                              grand(left_wing);
+                              grand(right_wing);
+                              grand(body);
+                              grand(fur);
+                              grand(face);
+                              grand(right_leg);
+                              grand(right_hair);
+                              grand(left_hair);
+                              console.log('スピード  = '+ spead_t);
                               if(face1 % 3 == 0){
                                    eye.x=Back_Baird.x;
                                    eye.y=Back_Baird.y;
+                                   idou(Ground1);
                               };
                                    if(face1 % 3 == 2){
                                    eye.x=Back_Baird.x;
                                    eye.y=Back_Baird.y;
+                                   idou(Ground1);
                                    };
                               if(eye.x>face.x+64){
                               eye.x=face.x+64;
@@ -278,6 +307,18 @@ window.onload = function(){
                               };
                               });
         
+        right_leg.addEventListener('enterframe',function(){
+                                   if(this.intersect(Blue_back)){
+                                   if(this.y<1400-1026){
+                                   ggg_t+=1;
+                                   }
+                                   else {
+                                   ggg_t = 0;
+                                   syosoku_t = -spead_t*0;
+                                   spead_t = 0;
+                                   };
+                                   };
+        });
         
         Ground1.addEventListener('enterframe',function(){
                                 if(Ground1.intersect(Back_Baird)){
@@ -306,8 +347,9 @@ window.onload = function(){
                                 if(Back_Baird.x > Ground1.x-50+1200){
                                 Back_Baird.x = Ground1.x+1200;
                                 };
-                                };
-                                };
+                                 };
+                                 };
+                            
                                 });//地面1
         
         core.rootScene.on('touchstart',function(e){
