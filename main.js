@@ -238,6 +238,7 @@ window.onload = function(){
                                    };
                               spead = syosoku-gra*ggg;
                               idou(eye);
+                              idou(eye);
                               idou(back_hair);
                               idou(tail);
                               idou(bangs);
