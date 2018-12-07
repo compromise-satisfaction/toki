@@ -4,6 +4,7 @@ window.onload = function(){
     var core = new Core(1400,1400);
     core.preload('tail.png','back_hair.png','right_leg.png','left_leg.png');
     core.preload('right_hand.png','left_hand.png','body.png','face.png');
+    core.preload('right_arm.png','left_arm.png','body.png','face.png');
     core.preload('fur.png','right_wing.png','left_wing.png','bangs.png');
     core.preload('right_hair.png','left_hair.png','Blue_back.png')
     core.preload('eye.png','Back_Baird.png','Ground.png');
@@ -15,6 +16,7 @@ window.onload = function(){
         var iii=1;
         var face1 = 1;
         var gra = 10;//重力加速度
+        var e = 0.3;//反発係数
         
         //枠の初期設定
         var Blue_back = new Sprite(1250,1250);
@@ -54,19 +56,33 @@ window.onload = function(){
         left_leg.y = tail.y-308;
         core.rootScene.addChild(left_leg);
         
-        //右腕の初期設定
+        //右手の初期設定
         var right_hand = new Sprite(300,740);
         right_hand.image = core.assets['right_hand.png'];
         right_hand.x = tail.x-80;
         right_hand.y = tail.y-483;
         core.rootScene.addChild(right_hand);
         
-        //左腕の初期設定
+        //右腕の初期設定
+        var right_arm = new Sprite(300,740);
+        right_arm.image = core.assets['right_arm.png'];
+        right_arm.x = tail.x-80;
+        right_arm.y = tail.y-483;
+        core.rootScene.addChild(right_arm);
+        
+        //左手の初期設定
         var left_hand = new Sprite(300,740);
         left_hand.image = core.assets['left_hand.png'];
         left_hand.x = tail.x+50;
         left_hand.y = tail.y-483;
         core.rootScene.addChild(left_hand);
+        
+        //左腕の初期設定
+        var left_arm = new Sprite(300,740);
+        left_arm.image = core.assets['left_arm.png'];
+        left_arm.x = tail.x+50;
+        left_arm.y = tail.y-483;
+        core.rootScene.addChild(left_arm);
         
         //身体の初期設定
         var body = new Sprite(400,400);
@@ -161,15 +177,19 @@ window.onload = function(){
                 name.x-=10;
                 right_leg.rotation=-time*0.8;
                 left_leg.rotation=time*0.8;
-                right_hand.rotation=-time*0.1;
-                left_hand.rotation=time*0.1;
+                right_hand.rotation=-time*0.2;
+                left_hand.rotation=time*0.2;
+                right_arm.rotation=-time*0.1;
+                left_arm.rotation=time*0.1;
             };
             if (core.input.right){
                 name.x+=10;
                 right_leg.rotation=-time*0.8;
                 left_leg.rotation=time*0.8;
-                right_hand.rotation=-time*0.1;
-                left_hand.rotation=time*0.1;
+                right_hand.rotation=-time*0.2;
+                left_hand.rotation=time*0.2;
+                right_arm.rotation=-time*0.1;
+                left_arm.rotation=time*0.1;
             };
         };
         
@@ -182,14 +202,17 @@ window.onload = function(){
                               };
                               time+=1*iii;
                               ggg+=0.1;
+                              e = 0.3;
                               right_wing.rotation=time*0.1;
                               left_wing.rotation=-time*0.1;
                               right_hair.rotation=(time+30)*0.015;
                               left_hair.rotation=-(time+30)*0.015;
                               right_leg.rotation=0;
                               left_leg.rotation=0;
-                              right_hand.rotation=(time+30)*0.015;
-                              left_hand.rotation=-(time+30)*0.015;
+                              right_hand.rotation=(time+20)*0.08;
+                              left_hand.rotation=-(time+20)*0.08;
+                              right_arm.rotation=(time+30)*0.02;
+                              left_arm.rotation=-(time+30)*0.02;
                               face.y += time*0.015;
                               eye.y += time*0.015;
                               right_wing.y += time*0.015;
@@ -203,6 +226,8 @@ window.onload = function(){
                               body.y += time*0.008;
                               left_hand.y += time*0.008;
                               right_hand.y += time*0.008;
+                              left_arm.y += time*0.008;
+                              right_arm.y += time*0.008;
                               fur.y += time*0.015;
                               tail.y += time*0.015;
                                    eye.x = tail.x+68;
@@ -218,6 +243,8 @@ window.onload = function(){
                               idou(bangs);
                               idou(left_hand);
                               idou(right_hand);
+                              idou(left_arm);
+                              idou(right_arm);
                               idou(left_leg);
                               idou(left_wing);
                               idou(right_wing);
@@ -256,19 +283,16 @@ window.onload = function(){
                                 if(Back_Baird.y > Ground1.y-129){
                                 if(Back_Baird.y < Ground1.y+50-129){
                                 ggg = 0;
-                                syosoku = -spead*0.3;//反射係数
+                                syosoku = -spead*e;
+                                 if (core.input.up){
+                                 syosoku += 25;
+                                 };
                                 spead = 0;
                                 Back_Baird.y = Ground1.y-129;
                                 };
                                 };
                                 if(Back_Baird.y < Ground1.y+200){
                                 if(Back_Baird.y > Ground1.y-50+200){
-                                ggg = 0;
-                                spead = 0;
-                                syosoku = -spead*0.3;//反射係数
-                                if (core.input.up){
-                                spead = 50;
-                                };
                                 Back_Baird.y = Ground1.y+200;
                                 };
                                 };
