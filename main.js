@@ -200,6 +200,10 @@ window.onload = function(){
             name.y-=spead_t;
         };
         
+        function grand1(name){
+          name.y += (1400-926-right_leg.y)
+        };
+        
         right_leg.addEventListener('enterframe',function(){
                               if(time>30){
                               iii*=-1;
@@ -289,10 +293,11 @@ window.onload = function(){
         right_leg.addEventListener('enterframe',function(){
                                    
                                    
-                                   console.log('スピード  = '+ spead_t + '距離　= ' +(1400-926-right_leg.y));
+                                   
                                    if(core.input.up){
                                    ggg_t=0;
                                    syosoku_t=0;
+                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +(1400-926-right_leg.y));
                                    if(spead_t<10){
                                    spead_t+=1;
                                    }
@@ -302,11 +307,32 @@ window.onload = function(){
                                    if(this.y<1400-926){
                                    ggg_t+=1;
                                    spead_t = syosoku_t-gra*ggg_t;
+                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +(1400-926-right_leg.y));
                                    }
                                    else {
                                    ggg_t = 0;
                                    syosoku_t = -spead_t*0;
                                    spead_t = 0;
+                                   if(this.y>1400-925){
+                                   grand1(eye);
+                                   grand1(back_hair);
+                                   grand1(tail);
+                                   grand1(bangs);
+                                   grand1(left_hand);
+                                   grand1(right_hand);
+                                   grand1(left_arm);
+                                   grand1(right_arm);
+                                   grand1(left_leg);
+                                   grand1(left_wing);
+                                   grand1(right_wing);
+                                   grand1(body);
+                                   grand1(fur);
+                                   grand1(face);
+                                   grand1(right_leg);
+                                   grand1(right_hair);
+                                   grand1(left_hair);
+                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +(1400-926-right_leg.y));
+                                   };
                                    };
                                    };
                                    
