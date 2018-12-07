@@ -173,8 +173,6 @@ window.onload = function(){
             };
             if (core.input.up){
                 name.y-=10;
-                ggg_t=0;
-                syosoku_t=0;
                 right_wing.rotation=time*0.4;
                 left_wing.rotation=-time*0.4;
             };
@@ -246,25 +244,7 @@ window.onload = function(){
                                    Back_Baird.y -= spead;
                                    };
                               spead = syosoku-gra*ggg;
-                              spead_t = syosoku_t-gra*ggg_t;
                               idou(eye);
-                              idou(eye);
-                              idou(back_hair);
-                              idou(tail);
-                              idou(bangs);
-                              idou(left_hand);
-                              idou(right_hand);
-                              idou(left_arm);
-                              idou(right_arm);
-                              idou(left_leg);
-                              idou(left_wing);
-                              idou(right_wing);
-                              idou(body);
-                              idou(fur);
-                              idou(face);
-                              idou(right_leg);
-                              idou(right_hair);
-                              idou(left_hair);
                               grand(eye);
                               grand(back_hair);
                               grand(tail);
@@ -282,7 +262,6 @@ window.onload = function(){
                               grand(right_leg);
                               grand(right_hair);
                               grand(left_hair);
-                              console.log('スピード  = '+ spead_t);
                               if(face1 % 3 == 0){
                                    eye.x=Back_Baird.x;
                                    eye.y=Back_Baird.y;
@@ -308,9 +287,21 @@ window.onload = function(){
                               });
         
         right_leg.addEventListener('enterframe',function(){
-                                   if(this.intersect(Blue_back)){
-                                   if(this.y<1400-1026){
+                                   
+                                   
+                                   console.log('スピード  = '+ spead_t + '距離　= ' +(1400-926-right_leg.y));
+                                   if(core.input.up){
+                                   ggg_t=0;
+                                   syosoku_t=0;
+                                   if(spead_t<10){
+                                   spead_t+=1;
+                                   }
+                                   else{};
+                                   }
+                                   else{
+                                   if(this.y<1400-926){
                                    ggg_t+=1;
+                                   spead_t = syosoku_t-gra*ggg_t;
                                    }
                                    else {
                                    ggg_t = 0;
@@ -318,6 +309,7 @@ window.onload = function(){
                                    spead_t = 0;
                                    };
                                    };
+                                   
         });
         
         Ground1.addEventListener('enterframe',function(){
