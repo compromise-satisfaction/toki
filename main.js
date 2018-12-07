@@ -165,16 +165,55 @@ window.onload = function(){
         Ground1.frame = 0;
         core.rootScene.addChild(Ground1);
         
+        function warp(name){
+                      if(name.x < 0-400){
+                      name.x = 1400+400;
+                      }
+                        if(name.x > 1400+400){
+                          name.x = 0-400;
+                      }
+            if(name.y < 0-1000){
+                name.y = 1400+1000;
+            }
+            if(name.y > 1400+1000){
+                name.y = 0-1000;
+            }
+            
+                      };
+        
         function idou(name){
             if (core.input.down){
                 name.y+=10;
-                right_wing.rotation=time*0.4;
-                left_wing.rotation=-time*0.4;
             };
             if (core.input.up){
                 name.y-=10;
                 right_wing.rotation=time*0.4;
                 left_wing.rotation=-time*0.4;
+                right_hand.rotation=(time+20)*0.68;
+                left_hand.rotation=-(time+20)*0.68;
+                right_arm.rotation=(time+30)*0.52;
+                left_arm.rotation=-(time+30)*0.52;
+                right_leg.rotation=(time+30)*0.52;
+                left_leg.rotation=-(time+30)*0.52;
+            };
+            if (core.input.left){
+                name.x-=10;
+            };
+            if (core.input.right){
+                name.x+=10;
+            };
+        };
+        
+        function grand(name){
+            name.y-=spead_t;
+            if (core.input.right){
+                name.x+=10;
+                right_leg.rotation=-time*0.8;
+                left_leg.rotation=time*0.8;
+                right_hand.rotation=-time*0.2;
+                left_hand.rotation=time*0.2;
+                right_arm.rotation=-time*0.1;
+                left_arm.rotation=time*0.1;
             };
             if (core.input.left){
                 name.x-=10;
@@ -185,23 +224,10 @@ window.onload = function(){
                 right_arm.rotation=-time*0.1;
                 left_arm.rotation=time*0.1;
             };
-            if (core.input.right){
-                name.x+=10;
-                right_leg.rotation=-time*0.8;
-                left_leg.rotation=time*0.8;
-                right_hand.rotation=-time*0.2;
-                left_hand.rotation=time*0.2;
-                right_arm.rotation=-time*0.1;
-                left_arm.rotation=time*0.1;
-            };
-        };
-        
-        function grand(name){
-            name.y-=spead_t;
         };
         
         function grand1(name){
-          name.y += (1400-926-right_leg.y)
+          name.y += (1320-926+10000-right_leg.y)
         };
         
         right_leg.addEventListener('enterframe',function(){
@@ -292,28 +318,24 @@ window.onload = function(){
         
         right_leg.addEventListener('enterframe',function(){
                                    
-                                   
-                                   
-                                   if(core.input.up){
-                                   ggg_t=0;
-                                   syosoku_t=0;
-                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +(1400-926-right_leg.y));
-                                   if(spead_t<10){
-                                   spead_t+=1;
-                                   }
-                                   else{};
-                                   }
-                                   else{
-                                   if(this.y<1400-926){
-                                   ggg_t+=1;
-                                   spead_t = syosoku_t-gra*ggg_t;
-                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +(1400-926-right_leg.y));
-                                   }
-                                   else {
-                                   ggg_t = 0;
-                                   syosoku_t = -spead_t*0;
-                                   spead_t = 0;
-                                   if(this.y>1400-925){
+                                   warp(eye);
+                                   warp(back_hair);
+                                   warp(tail);
+                                   warp(bangs);
+                                   warp(left_hand);
+                                   warp(right_hand);
+                                   warp(left_arm);
+                                   warp(right_arm);
+                                   warp(left_leg);
+                                   warp(left_wing);
+                                   warp(right_wing);
+                                   warp(body);
+                                   warp(fur);
+                                   warp(face);
+                                   warp(right_hair);
+                                   warp(left_hair);
+                                   warp(right_leg);
+                                   if(this.y>1320-925+10000){
                                    grand1(eye);
                                    grand1(back_hair);
                                    grand1(tail);
@@ -328,11 +350,30 @@ window.onload = function(){
                                    grand1(body);
                                    grand1(fur);
                                    grand1(face);
-                                   grand1(right_leg);
                                    grand1(right_hair);
                                    grand1(left_hair);
-                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +(1400-926-right_leg.y));
+                                   grand1(right_leg);
+                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +((1320-926+10000-right_leg.y)));
                                    };
+                                   
+                                   if(core.input.up){
+                                   ggg_t=0;
+                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +((1320-926+10000-right_leg.y)));
+                                   if(spead_t<1000){
+                                   spead_t=0.01;
+                                   syosoku_t=spead_t;
+                                   }
+                                   }
+                                   else{
+                                   if(this.y<1320-926+10000){
+                                   ggg_t+=0.01;
+                                   spead_t = syosoku_t-gra*ggg_t;
+                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +((1320-926+10000-right_leg.y)));
+                                   }
+                                   else {
+                                   ggg_t = 0;
+                                   syosoku_t = -spead_t*0;
+                                   spead_t = 0;
                                    };
                                    };
                                    
