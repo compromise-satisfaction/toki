@@ -4,9 +4,9 @@ window.onload = function(){
     var core = new Core(1400,1400);
     core.preload('tail.png','back_hair.png','right_leg.png','left_leg.png');
     core.preload('right_hand.png','left_hand.png','body.png','face.png');
-    core.preload('neck.png','right_wing.png','left_wing.png','bangs.png');
-    core.preload('right_hair.png','left_hair.png','waku.png')
-    core.preload('eye.png','eyes.png','zimen.png');
+    core.preload('fur.png','right_wing.png','left_wing.png','bangs.png');
+    core.preload('right_hair.png','left_hair.png','Blue_back.png')
+    core.preload('eye.png','Back_Baird.png','Ground.png');
     core.fps = 100;
     core.onload = function(){
         
@@ -14,14 +14,14 @@ window.onload = function(){
         var time=0;
         var iii=1;
         var face1 = 1;
-        var gra = 1;//重力加速度
+        var gra = 10;//重力加速度
         
         //枠の初期設定
-        var waku = new Sprite(1250,1250);
-        waku.image = core.assets['waku.png'];
-        waku.x = 100;
-        waku.y = 100;
-        core.rootScene.addChild(waku);
+        var Blue_back = new Sprite(1250,1250);
+        Blue_back.image = core.assets['Blue_back.png'];
+        Blue_back.x = 100;
+        Blue_back.y = 100;
+        core.rootScene.addChild(Blue_back);
 
         //尻尾の初期設定
         var tail = new Sprite(350,250);
@@ -91,11 +91,11 @@ window.onload = function(){
         core.rootScene.addChild(face);
         
         //首の初期設定
-        var neck = new Sprite(250,150);
-        neck.image = core.assets['neck.png'];
-        neck.x = tail.x+3;
-        neck.y = tail.y-199;
-        core.rootScene.addChild(neck);
+        var fur = new Sprite(250,150);
+        fur.image = core.assets['fur.png'];
+        fur.x = tail.x+3;
+        fur.y = tail.y-199;
+        core.rootScene.addChild(fur);
         
         //右羽の初期設定
         var right_wing = new Sprite(360,360);
@@ -133,18 +133,18 @@ window.onload = function(){
         core.rootScene.addChild(left_hair);
         
         //バックベアードの初期設定
-        var eyes = new Sprite(173,129);
-        eyes.image = core.assets['eyes.png'];
-        eyes.x = 0;
-        eyes.y = 5000;
-        core.rootScene.addChild(eyes);
+        var Back_Baird = new Sprite(173,129);
+        Back_Baird.image = core.assets['Back_Baird.png'];
+        Back_Baird.x = 0;
+        Back_Baird.y = 5000;
+        core.rootScene.addChild(Back_Baird);
         
-        var zimen1 = new Sprite(1200,200);
-        zimen1.image = core.assets['zimen.png'];
-        zimen1.x = tail.x-467;
-        zimen1.y = 5000;
-        zimen1.frame = 0;
-        core.rootScene.addChild(zimen1);
+        var Ground1 = new Sprite(1200,200);
+        Ground1.image = core.assets['Ground.png'];
+        Ground1.x = tail.x-467;
+        Ground1.y = 5000;
+        Ground1.frame = 0;
+        core.rootScene.addChild(Ground1);
         
         function idou(name){
             if (core.input.down){
@@ -199,16 +199,17 @@ window.onload = function(){
                               bangs.y += time*0.015;
                               back_hair.y += time*0.015;
                               back_hair.rotation =-(time+15)*0.05;
+                              bangs.rotation =(time+30)*0.03;
                               body.y += time*0.008;
                               left_hand.y += time*0.008;
                               right_hand.y += time*0.008;
-                              neck.y += time*0.015;
+                              fur.y += time*0.015;
                               tail.y += time*0.015;
                                    eye.x = tail.x+68;
                                    eye.y = tail.y-275;
                                    if(face1 % 3 == 0){
-                                   eyes.rotation=time;
-                                   eyes.y -= spead;
+                                   Back_Baird.rotation=time;
+                                   Back_Baird.y -= spead;
                                    };
                               spead = syosoku-gra*ggg;
                               idou(eye);
@@ -221,19 +222,19 @@ window.onload = function(){
                               idou(left_wing);
                               idou(right_wing);
                               idou(body);
-                              idou(neck);
+                              idou(fur);
                               idou(face);
                               idou(right_leg);
-                              idou(zimen1);
+                              idou(Ground1);
                               idou(right_hair);
                               idou(left_hair);
                               if(face1 % 3 == 0){
-                                   eye.x=eyes.x;
-                                   eye.y=eyes.y;
+                                   eye.x=Back_Baird.x;
+                                   eye.y=Back_Baird.y;
                               };
                                    if(face1 % 3 == 2){
-                                   eye.x=eyes.x;
-                                   eye.y=eyes.y;
+                                   eye.x=Back_Baird.x;
+                                   eye.y=Back_Baird.y;
                                    };
                               if(eye.x>face.x+64){
                               eye.x=face.x+64;
@@ -250,32 +251,35 @@ window.onload = function(){
                               });
         
         
-        zimen1.addEventListener('enterframe',function(){
-                                if(zimen1.intersect(eyes)){
-                                if(eyes.y > zimen1.y-129){
-                                if(eyes.y < zimen1.y+50-129){
+        Ground1.addEventListener('enterframe',function(){
+                                if(Ground1.intersect(Back_Baird)){
+                                if(Back_Baird.y > Ground1.y-129){
+                                if(Back_Baird.y < Ground1.y+50-129){
                                 ggg = 0;
                                 syosoku = -spead*0.3;//反射係数
                                 spead = 0;
-                                eyes.y = zimen1.y-129;
+                                Back_Baird.y = Ground1.y-129;
                                 };
                                 };
-                                if(eyes.y < zimen1.y+200){
-                                if(eyes.y > zimen1.y-50+200){
+                                if(Back_Baird.y < Ground1.y+200){
+                                if(Back_Baird.y > Ground1.y-50+200){
                                 ggg = 0;
-                                syosoku = -spead*0.3;//反射係数
                                 spead = 0;
-                                eyes.y = zimen1.y+200;
+                                syosoku = -spead*0.3;//反射係数
+                                if (core.input.up){
+                                spead = 50;
+                                };
+                                Back_Baird.y = Ground1.y+200;
                                 };
                                 };
-                                if(eyes.x > zimen1.x-173){
-                                if(eyes.x < zimen1.x+50-173){
-                                eyes.x = zimen1.x-173;
+                                if(Back_Baird.x > Ground1.x-173){
+                                if(Back_Baird.x < Ground1.x+50-173){
+                                Back_Baird.x = Ground1.x-173;
                                 };
                                 };
-                                if(eyes.x < zimen1.x+1200){
-                                if(eyes.x > zimen1.x-50+1200){
-                                eyes.x = zimen1.x+1200;
+                                if(Back_Baird.x < Ground1.x+1200){
+                                if(Back_Baird.x > Ground1.x-50+1200){
+                                Back_Baird.x = Ground1.x+1200;
                                 };
                                 };
                                 };
@@ -289,15 +293,15 @@ window.onload = function(){
                           syosoku=0;
                           ggg=0;
                           if(face1 % 3 == 1){
-                          eyes.y=5000;
-                          zimen1.y=5000;
-                          waku.y=100;
+                          Back_Baird.y=5000;
+                          Ground1.y=5000;
+                          Blue_back.y=100;
                           };
                           if(face1 % 3 == 2){
-                          eyes.x=e.x;
-                          eyes.y=e.y;
-                          zimen1.y = right_leg.y+926;
-                          waku.y = 5000;
+                          Back_Baird.x=e.x;
+                          Back_Baird.y=e.y;
+                          Ground1.y = right_leg.y+926;
+                          Blue_back.y = 5000;
                           };
                           });
         
