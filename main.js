@@ -353,7 +353,7 @@ window.onload = function(){
                                    ggg_t=0;
                                    console.log('スピード　= '+ spead_t + ' 距離　= ' +((1320-926-right_leg.y)));
                                    if(spead_t<10){
-                                   spead_t=0.01;
+                                   spead_t+=0.01;
                                    syosoku_t=spead_t;
                                    }
                                    }
