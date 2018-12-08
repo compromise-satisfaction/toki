@@ -172,13 +172,6 @@ window.onload = function(){
                         if(name.x > 1400+400){
                           name.x = 0-400;
                       }
-            if(name.y < 0-1000){
-                name.y = 1400+1000;
-            }
-            if(name.y > 1400+1000){
-                name.y = 0-1000;
-            }
-            
                       };
         
         function idou(name){
@@ -227,7 +220,7 @@ window.onload = function(){
         };
         
         function grand1(name){
-          name.y += (1320-926+10000-right_leg.y)
+          name.y += (1320-926-right_leg.y)
         };
         
         right_leg.addEventListener('enterframe',function(){
@@ -353,22 +346,22 @@ window.onload = function(){
                                    grand1(right_hair);
                                    grand1(left_hair);
                                    grand1(right_leg);
-                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +((1320-926+10000-right_leg.y)));
+                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +((1320-926-right_leg.y)));
                                    };
                                    
                                    if(core.input.up){
                                    ggg_t=0;
-                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +((1320-926+10000-right_leg.y)));
-                                   if(spead_t<1000){
+                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +((1320-926-right_leg.y)));
+                                   if(spead_t<10){
                                    spead_t=0.01;
                                    syosoku_t=spead_t;
                                    }
                                    }
                                    else{
-                                   if(this.y<1320-926+10000){
+                                   if(this.y<1320-926){
                                    ggg_t+=0.01;
                                    spead_t = syosoku_t-gra*ggg_t;
-                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +((1320-926+10000-right_leg.y)));
+                                   console.log('スピード　= '+ spead_t + ' 距離　= ' +((1320-926-right_leg.y)));
                                    }
                                    else {
                                    ggg_t = 0;
