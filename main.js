@@ -464,8 +464,8 @@ window.onload = function(){
                                    if(core.input.up){
                                    ggg_t=0
                                    
-                                   if(spead_t<10){
-                                   spead_t+=0.01
+                                   if(spead_t<11){
+                                   spead_t+=0.1
                                    syosoku_t=spead_t
                                    }
                                    }
