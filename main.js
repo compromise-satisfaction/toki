@@ -171,7 +171,7 @@ window.onload = function(){
         label1.color = 'red';
         label1.font = '40px "Arial"';
         label1.on('enterframe', function(){
-                 label1.text = ('スピード　= '+Math.round(spead_t));
+                 label1.text = ('スピード　= '+Math.ceil(spead_t));
                  });
         core.rootScene.addChild(label1)
         
@@ -184,26 +184,6 @@ window.onload = function(){
                  label2.text = ('距離　= ' +Math.round((1320-926-right_leg.y)));
                  });
         core.rootScene.addChild(label2)
-        
-        var label3 = new Label();
-        label3.x = 0;
-        label3.y = 80;
-        label3.color = 'red';
-        label3.font = '40px "Arial"';
-        label3.on('enterframe', function(){
-                  label3.text = ('腕　= '+Math.round((right_arm.rotation)));
-                  });
-        core.rootScene.addChild(label3)
-        
-        var label4 = new Label();
-        label4.x = 0;
-        label4.y = 120;
-        label4.color = 'red';
-        label4.font = '40px "Arial"';
-        label4.on('enterframe', function(){
-                  label4.text = ('ベアード　    = '+(Back_Baird.x-right_leg.x));
-                  });
-        core.rootScene.addChild(label4)
         
         function warp(name){
                       if(name.x < 0-400){
