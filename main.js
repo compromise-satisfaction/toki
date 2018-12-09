@@ -165,12 +165,89 @@ window.onload = function(){
         Ground1.frame = 0
         core.rootScene.addChild(Ground1)
         
+        var label1 = new Label();
+        label1.x = 0;
+        label1.y = 0;
+        label1.color = 'red';
+        label1.font = '40px "Arial"';
+        label1.on('enterframe', function(){
+                 label1.text = ('スピード　= '+Math.round(spead_t));
+                 });
+        core.rootScene.addChild(label1)
+        
+        var label2 = new Label();
+        label2.x = 0;
+        label2.y = 40;
+        label2.color = 'red';
+        label2.font = '40px "Arial"';
+        label2.on('enterframe', function(){
+                 label2.text = ('距離　= ' +Math.round((1320-926-right_leg.y)));
+                 });
+        core.rootScene.addChild(label2)
+        
+        var label3 = new Label();
+        label3.x = 0;
+        label3.y = 80;
+        label3.color = 'red';
+        label3.font = '40px "Arial"';
+        label3.on('enterframe', function(){
+                  label3.text = ('尻尾　= '+(right_leg.x-tail.x)
+                                 +'   後髪　= '+(right_leg.x-back_hair.x)
+                                 +'     左脚　= '+(right_leg.x-left_leg.x)
+                                 +'   右手　= '+(right_leg.x-right_hand.x)
+                                 +'     右腕　= '+(right_leg.x-right_arm.x)
+                                 +'     左手　= '+(right_leg.x-left_hand.x)
+                                 +'    左腕　= '+(right_leg.x-left_arm.x)
+                                 +'    身体　= '+(right_leg.x-body.x)
+                                 +'     両目　= '+(right_leg.x-eye.x)
+                                 +'    顔　= '+(right_leg.x-face.x)
+                                 +'     ファー　= '+(right_leg.x-fur.x)
+                                 +'   右翼　= '+(right_leg.x-right_wing.x)
+                                 +'     左翼　= '+(right_leg.x-left_wing.x)
+                                 +'    前髪　= '+(right_leg.x-bangs.x)
+                                 +'    右髪　= '+(right_leg.x-right_hair.x)
+                                 +'     左髪　= '+(right_leg.x-left_hair.x));
+                  });
+        core.rootScene.addChild(label3)
+        
         function warp(name){
                       if(name.x < 0-400){
                       name.x = 1400+400
+                          tail.x = right_leg.x+13
+                          back_hair.x = right_leg.x-47
+                          left_leg.x = right_leg.x+102
+                          right_hand.x = right_leg.x-67
+                          right_arm.x = right_leg.x-67
+                          left_hand.x = right_leg.x+63
+                          left_arm.x = right_leg.x+63
+                          body.x = right_leg.x-48
+                          eye.x = right_leg.x+97
+                          face.x = right_leg.x+33
+                          fur.x = right_leg.x+16
+                          right_wing.x = right_leg.x-90
+                          left_wing.x = right_leg.x+30
+                          bangs.x = right_leg.x+11
+                          right_hair.x = right_leg.x-38
+                          left_hair.x = right_leg.x+93
                       }
                         if(name.x > 1400+400){
                           name.x = 0-400
+                            tail.x = right_leg.x+13
+                            back_hair.x = right_leg.x-47
+                            left_leg.x = right_leg.x+102
+                            right_hand.x = right_leg.x-67
+                            right_arm.x = right_leg.x-67
+                            left_hand.x = right_leg.x+63
+                            left_arm.x = right_leg.x+63
+                            body.x = right_leg.x-48
+                            eye.x = right_leg.x+97
+                            face.x = right_leg.x+33
+                            fur.x = right_leg.x+16
+                            right_wing.x = right_leg.x-90
+                            left_wing.x = right_leg.x+30
+                            bangs.x = right_leg.x+11
+                            right_hair.x = right_leg.x-38
+                            left_hair.x = right_leg.x+93
                       }
                       }
         
@@ -181,14 +258,6 @@ window.onload = function(){
             if (core.input.up){
                 name.y-=10
                 if(face1 % 3 == 1){
-                right_wing.rotation=time*0.4
-                left_wing.rotation=-time*0.4
-                right_hand.rotation=(time+20)*0.68
-                left_hand.rotation=-(time+20)*0.68
-                right_arm.rotation=(time+30)*0.52
-                left_arm.rotation=-(time+30)*0.52
-                right_leg.rotation=(time+30)*0.52
-                left_leg.rotation=-(time+30)*0.52
                 }
             }
             if (core.input.left){
@@ -204,21 +273,25 @@ window.onload = function(){
             if(face1 % 3 == 1){
             if (core.input.right){
                 name.x+=10
-                right_leg.rotation=-time*0.8
-                left_leg.rotation=time*0.8
-                right_hand.rotation=-time*0.2
-                left_hand.rotation=time*0.2
-                right_arm.rotation=-time*0.1
-                left_arm.rotation=time*0.1
+                if(1320-926-right_leg.y==0){
+                    right_leg.rotation=-time*0.8
+                    left_leg.rotation=time*0.8
+                    right_hand.rotation=-time*0.2
+                    left_hand.rotation=time*0.2
+                    right_arm.rotation=-time*0.1
+                    left_arm.rotation=time*0.1
+                }
             }
             if (core.input.left){
                 name.x-=10
-                right_leg.rotation=-time*0.8
-                left_leg.rotation=time*0.8
-                right_hand.rotation=-time*0.2
-                left_hand.rotation=time*0.2
-                right_arm.rotation=-time*0.1
-                left_arm.rotation=time*0.1
+                if(1320-926-right_leg.y==0){
+                    right_leg.rotation=-time*0.8
+                    left_leg.rotation=time*0.8
+                    right_hand.rotation=-time*0.2
+                    left_hand.rotation=time*0.2
+                    right_arm.rotation=-time*0.1
+                    left_arm.rotation=time*0.1
+                }
             }
             }
         }
@@ -226,7 +299,6 @@ window.onload = function(){
         function grand1(name){
           name.y += (1320-926-right_leg.y)
           spead_t = 0
-          console.log('スピード　= '+Math.round(spead_t) + ' 距離　= ' +Math.round((1320-926-right_leg.y)))
         }
         
         right_leg.addEventListener('enterframe',function(){
@@ -239,6 +311,18 @@ window.onload = function(){
                               time+=1*iii
                               ggg+=0.1
                               e = 0.3
+                                   if(face1 % 3 == 1){
+                                   if(1320-926-right_leg.y>0){
+                                   right_wing.rotation=time*0.4
+                                   left_wing.rotation=-time*0.4
+                                   right_hand.rotation=(time+20)*0.68
+                                   left_hand.rotation=-(time+20)*0.68
+                                   right_arm.rotation=(time+30)*0.52
+                                   left_arm.rotation=-(time+30)*0.52
+                                   right_leg.rotation=(time+30)*0.52
+                                   left_leg.rotation=-(time+30)*0.52
+                                   }
+                              else{
                               right_wing.rotation=time*0.1
                               left_wing.rotation=-time*0.1
                               right_hair.rotation=(time+30)*0.015
@@ -266,6 +350,37 @@ window.onload = function(){
                               right_arm.y += time*0.008
                               fur.y += time*0.015
                               tail.y += time*0.015
+                              }
+                              }
+                                   else{
+                                   right_wing.rotation=time*0.1
+                                   left_wing.rotation=-time*0.1
+                                   right_hair.rotation=(time+30)*0.015
+                                   left_hair.rotation=-(time+30)*0.015
+                                   right_leg.rotation=0
+                                   left_leg.rotation=0
+                                   right_hand.rotation=(time+20)*0.08
+                                   left_hand.rotation=-(time+20)*0.08
+                                   right_arm.rotation=(time+30)*0.02
+                                   left_arm.rotation=-(time+30)*0.02
+                                   face.y += time*0.015
+                                   eye.y += time*0.015
+                                   right_wing.y += time*0.015
+                                   left_wing.y += time*0.015
+                                   right_hair.y += time*0.015
+                                   left_hair.y += time*0.015
+                                   bangs.y += time*0.015
+                                   back_hair.y += time*0.015
+                                   back_hair.rotation =-(time+15)*0.05
+                                   bangs.rotation =(time+30)*0.03
+                                   body.y += time*0.008
+                                   left_hand.y += time*0.008
+                                   right_hand.y += time*0.008
+                                   left_arm.y += time*0.008
+                                   right_arm.y += time*0.008
+                                   fur.y += time*0.015
+                                   tail.y += time*0.015
+                                   }
                                    eye.x = tail.x+68
                                    eye.y = tail.y-275
                                    if(face1 % 3 == 0){
@@ -288,9 +403,9 @@ window.onload = function(){
                               grand(body)
                               grand(fur)
                               grand(face)
-                              grand(right_leg)
                               grand(right_hair)
                               grand(left_hair)
+                              grand(right_leg)
                               if(face1 % 3 == 0){
                                    eye.x=Back_Baird.x
                                    eye.y=Back_Baird.y
@@ -318,22 +433,6 @@ window.onload = function(){
         right_leg.addEventListener('enterframe',function(){
                                    
                                    if(face1 % 3 == 1){
-                                   warp(eye)
-                                   warp(back_hair)
-                                   warp(tail)
-                                   warp(bangs)
-                                   warp(left_hand)
-                                   warp(right_hand)
-                                   warp(left_arm)
-                                   warp(right_arm)
-                                   warp(left_leg)
-                                   warp(left_wing)
-                                   warp(right_wing)
-                                   warp(body)
-                                   warp(fur)
-                                   warp(face)
-                                   warp(right_hair)
-                                   warp(left_hair)
                                    warp(right_leg)
                                    if(this.y>1320-926){
                                    grand1(eye)
@@ -353,12 +452,11 @@ window.onload = function(){
                                    grand1(right_hair)
                                    grand1(left_hair)
                                    grand1(right_leg)
-                                   console.log('スピード　= '+Math.round(spead_t) + ' 距離　= ' +Math.round((1320-926-right_leg.y)))
                                    }
                                    
                                    if(core.input.up){
                                    ggg_t=0
-                                   console.log('スピード　= '+Math.round(spead_t) + ' 距離　= ' +Math.round((1320-926-right_leg.y)))
+                                   
                                    if(spead_t<10){
                                    spead_t+=0.01
                                    syosoku_t=spead_t
@@ -368,7 +466,6 @@ window.onload = function(){
                                    if(this.y<1320-926){
                                    ggg_t+=0.01
                                    spead_t = syosoku_t-gra*ggg_t
-                                   console.log('スピード　= '+Math.round(spead_t) + ' 距離　= ' +Math.round((1320-926-right_leg.y)))
                                    }
                                    else {
                                    ggg_t = 0
@@ -442,12 +539,13 @@ window.onload = function(){
                           Ground1.y=5000
                           Blue_back.y=100
                           }
-                          if(face1 % 3 == 2){
+                          else if(face1 % 3 == 2){
                           syosoku_t=0
                           spead_t=0
                           Back_Baird.x=e.x
                           Back_Baird.y=e.y
                           Ground1.y = right_leg.y+926
+                          Ground1.x = right_leg.x-450
                           Blue_back.y = 5000
                           }
                           })
