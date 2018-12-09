@@ -191,24 +191,19 @@ window.onload = function(){
         label3.color = 'red';
         label3.font = '40px "Arial"';
         label3.on('enterframe', function(){
-                  label3.text = ('尻尾　= '+(right_leg.x-tail.x)
-                                 +'   後髪　= '+(right_leg.x-back_hair.x)
-                                 +'     左脚　= '+(right_leg.x-left_leg.x)
-                                 +'   右手　= '+(right_leg.x-right_hand.x)
-                                 +'     右腕　= '+(right_leg.x-right_arm.x)
-                                 +'     左手　= '+(right_leg.x-left_hand.x)
-                                 +'    左腕　= '+(right_leg.x-left_arm.x)
-                                 +'    身体　= '+(right_leg.x-body.x)
-                                 +'     両目　= '+(right_leg.x-eye.x)
-                                 +'    顔　= '+(right_leg.x-face.x)
-                                 +'     ファー　= '+(right_leg.x-fur.x)
-                                 +'   右翼　= '+(right_leg.x-right_wing.x)
-                                 +'     左翼　= '+(right_leg.x-left_wing.x)
-                                 +'    前髪　= '+(right_leg.x-bangs.x)
-                                 +'    右髪　= '+(right_leg.x-right_hair.x)
-                                 +'     左髪　= '+(right_leg.x-left_hair.x));
+                  label3.text = ('腕　= '+Math.round((right_arm.rotation)));
                   });
         core.rootScene.addChild(label3)
+        
+        var label4 = new Label();
+        label4.x = 0;
+        label4.y = 120;
+        label4.color = 'red';
+        label4.font = '40px "Arial"';
+        label4.on('enterframe', function(){
+                  label4.text = ('ベアード　    = '+(Back_Baird.x-right_leg.x));
+                  });
+        core.rootScene.addChild(label4)
         
         function warp(name){
                       if(name.x < 0-400){
@@ -253,18 +248,18 @@ window.onload = function(){
         
         function idou(name){
             if (core.input.down){
-                name.y+=10
+                name.y+=5
             }
             if (core.input.up){
-                name.y-=10
+                name.y-=5
                 if(face1 % 3 == 1){
                 }
             }
             if (core.input.left){
-                name.x-=10
+                name.x-=5
             }
             if (core.input.right){
-                name.x+=10
+                name.x+=5
             }
         }
         
@@ -406,15 +401,47 @@ window.onload = function(){
                               grand(right_hair)
                               grand(left_hair)
                               grand(right_leg)
-                              if(face1 % 3 == 0){
+                                   if(face1 % 3 == 0){
                                    eye.x=Back_Baird.x
                                    eye.y=Back_Baird.y
                                    idou(Ground1)
-                              }
+                                   if(Back_Baird.y-right_leg.y<463 && Back_Baird.y-right_leg.y>-463+280 && Back_Baird.x-right_leg.x<-530){
+                                   right_arm.rotation=0-(Back_Baird.y-right_leg.y-463)/5;
+                                   right_hand.rotation=0-(Back_Baird.y-right_leg.y-463)/5;
+                                   }
+                                   else if(Back_Baird.y-right_leg.y<463 && Back_Baird.y-right_leg.y>-463+280 && Back_Baird.x-right_leg.x>650){
+                                   left_arm.rotation=0+(Back_Baird.y-right_leg.y-463)/5;
+                                   left_hand.rotation=0+(Back_Baird.y-right_leg.y-463)/5;
+                                   }
+                                   else if(Back_Baird.y-right_leg.y<-463+280 && Back_Baird.x-right_leg.x<-530){
+                                   right_arm.rotation=130;
+                                   right_hand.rotation=130;
+                                   }
+                                   else if(Back_Baird.y-right_leg.y<-463+280 && Back_Baird.x-right_leg.x>650){
+                                   left_arm.rotation=-130;
+                                   left_hand.rotation=-130;
+                                   }
+                                   }
                                    if(face1 % 3 == 2){
                                    eye.x=Back_Baird.x
                                    eye.y=Back_Baird.y
                                    idou(Ground1)
+                                   if(Back_Baird.y-right_leg.y<463 && Back_Baird.y-right_leg.y>-463+280 && Back_Baird.x-right_leg.x<-530){
+                                   right_arm.rotation=0-(Back_Baird.y-right_leg.y-463)/5;
+                                   right_hand.rotation=0-(Back_Baird.y-right_leg.y-463)/5;
+                                   }
+                                   else if(Back_Baird.y-right_leg.y<463 && Back_Baird.y-right_leg.y>-463+280 && Back_Baird.x-right_leg.x>650){
+                                   left_arm.rotation=0+(Back_Baird.y-right_leg.y-463)/5;
+                                   left_hand.rotation=0+(Back_Baird.y-right_leg.y-463)/5;
+                                   }
+                                   else if(Back_Baird.y-right_leg.y<-463+280 && Back_Baird.x-right_leg.x<-530){
+                                   right_arm.rotation=130;
+                                   right_hand.rotation=130;
+                                   }
+                                   else if(Back_Baird.y-right_leg.y<-463+280 && Back_Baird.x-right_leg.x>650){
+                                   left_arm.rotation=-130;
+                                   left_hand.rotation=-130;
+                                   }
                                    }
                               if(eye.x>face.x+64){
                               eye.x=face.x+64
